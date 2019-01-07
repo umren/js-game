@@ -16,3 +16,14 @@ class Vector {
     return new Vector(this.x * multiply, this.y * multiply);
   }
 }
+
+class Actor {
+  constructor() {
+    this.pos = new Vector();
+    this.size = new Vector(1, 1);
+    this.speed = new Vector(0, 0);
+    this.type = "";
+  }
+
+  act() {}
+}
