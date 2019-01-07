@@ -22,7 +22,7 @@ class Actor {
     this.pos = new Vector();
     this.size = new Vector(1, 1);
     this.speed = new Vector(0, 0);
-    this.type = "";
+    this.type = "actor";
   }
 
   act() {}
