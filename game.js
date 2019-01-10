@@ -18,7 +18,7 @@ class Vector {
 }
 
 class Actor {
-  constructor(position, size, speed) {
+  constructor(position, size, speed, type) {
     // if position is given it must be a Vector
     if (position != undefined && !(position instanceof Vector)) {
       throw Error("Position is not a Vector");
@@ -55,19 +55,10 @@ class Actor {
       this.speed = new Vector(0, 0);
     }
 
-    this.type = "actor";
-  }
-
-  get type() {
-    return this._type;
-  }
-
-  set type(val) {
-    if (this._type !== undefined) {
-      throw Error("You can't set type");
-    } else {
-      this._type = val;
-    }
+    Object.defineProperty(this, "type", {
+      value: "actor",
+      writable: false
+    });
   }
 
   set pos(val) {
@@ -108,6 +99,4 @@ class Actor {
   }
 }
 
-class Level {
-  constructor() {}
-}
+class Level {}
