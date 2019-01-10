@@ -70,5 +70,44 @@ class Actor {
     }
   }
 
+  set pos(val) {
+    this._position = val;
+    this.left = val.x;
+    this.top = val.y;
+  }
+
+  get pos() {
+    return this._position;
+  }
+
+  set size(val) {
+    this._size = val;
+    this.right = this.left + val.x;
+    this.bottom = this.top + val.y;
+  }
+
+  get size() {
+    return this._size;
+  }
+
   act() {}
+
+  isIntersect(actor) {
+    if (!(actor instanceof Actor)) {
+      throw Error("Not a Actor");
+    }
+
+    if (JSON.stringify(this) == JSON.stringify(actor)) return false;
+
+    return !(
+      this.left >= actor.right ||
+      this.right <= actor.left ||
+      this.top >= actor.bottom ||
+      this.bottom <= actor.top
+    );
+  }
+}
+
+class Level {
+  constructor() {}
 }
