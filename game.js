@@ -18,11 +18,29 @@ class Vector {
 }
 
 class Actor {
-  constructor() {
-    this.pos = new Vector();
+  constructor(position) {
+    if (position != undefined) {
+      this.pos = position;
+    } else {
+      this.pos = new Vector();
+    }
+
     this.size = new Vector(1, 1);
     this.speed = new Vector(0, 0);
     this.type = "actor";
+    console.log(this.pos);
+  }
+
+  get type() {
+    return this._type;
+  }
+
+  set type(val) {
+    if (this._type !== undefined) {
+      throw Error("You can't set type");
+    } else {
+      this._type = val;
+    }
   }
 
   act() {}
