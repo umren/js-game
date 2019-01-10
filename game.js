@@ -99,4 +99,9 @@ class Actor {
   }
 }
 
-class Level {}
+class Level {
+  constructor() {
+    this.height = 0;
+    this.width = 0;
+  }
+}
