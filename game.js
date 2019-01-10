@@ -18,17 +18,44 @@ class Vector {
 }
 
 class Actor {
-  constructor(position) {
+  constructor(position, size, speed) {
+    // if position is given it must be a Vector
+    if (position != undefined && !(position instanceof Vector)) {
+      throw Error("Position is not a Vector");
+    }
+
+    // if position is undefined, set default Vector
     if (position != undefined) {
       this.pos = position;
     } else {
       this.pos = new Vector();
     }
 
-    this.size = new Vector(1, 1);
-    this.speed = new Vector(0, 0);
+    // if size is given it must be a Vector
+    if (size != undefined && !(size instanceof Vector)) {
+      throw Error("Size is not a Vector");
+    }
+
+    // if size is undefined, set it Vector(1,1 )
+    if (size != undefined) {
+      this.size = size;
+    } else {
+      this.size = new Vector(1, 1);
+    }
+
+    // if size is given it must be a Vector
+    if (speed != undefined && !(speed instanceof Vector)) {
+      throw Error("Size is not a Vector");
+    }
+
+    // if size is undefined, set it Vector(1,1 )
+    if (speed != undefined) {
+      this.speed = speed;
+    } else {
+      this.speed = new Vector(0, 0);
+    }
+
     this.type = "actor";
-    console.log(this.pos);
   }
 
   get type() {
