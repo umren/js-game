@@ -18,7 +18,7 @@ class Vector {
 }
 
 class Actor {
-  constructor(position, size, speed, type) {
+  constructor(position, size, speed) {
     // if position is given it must be a Vector
     if (position != undefined && !(position instanceof Vector)) {
       throw Error("Position is not a Vector");
@@ -122,5 +122,15 @@ class Level {
     this.grid = grid;
     this.status = null;
     this.finishDelay = 1;
+
+    if (actors != undefined) {
+      this.actors = actors;
+
+      actors.forEach(actor => {
+        if (actor.title == "Игрок") {
+          this.player = actor;
+        }
+      });
+    }
   }
 }
