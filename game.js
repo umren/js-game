@@ -119,7 +119,12 @@ class Level {
       this.width = 0;
     }
 
-    this.grid = grid;
+    if (grid != undefined) {
+      this.grid = grid;
+    } else {
+      this.grid = null;
+    }
+
     this.status = null;
     this.finishDelay = 1;
 
@@ -131,6 +136,30 @@ class Level {
           this.player = actor;
         }
       });
+    }
+  }
+
+  isFinished() {
+    if (this.status != null && this.finishDelay < 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  actorAt(actor) {
+    if (!(actor instanceof Actor)) throw Error("Not an actor");
+    if (this.grid === null) return undefined;
+    if (this.actors.length == 1) return undefined;
+
+    if (this.actors != undefined) {
+      let found = undefined;
+      this.actors.forEach(act => {
+        if (act.isIntersect(actor)) {
+          found = act;
+        }
+      });
+      return found;
     }
   }
 }
