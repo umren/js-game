@@ -100,8 +100,27 @@ class Actor {
 }
 
 class Level {
-  constructor() {
-    this.height = 0;
-    this.width = 0;
+  constructor(grid, actors) {
+    if (grid != undefined) {
+      this.height = grid.length;
+    } else {
+      this.height = 0;
+    }
+
+    if (grid != undefined) {
+      let max = 0;
+
+      grid.forEach(item => {
+        if (item.length > max) max = item.length;
+      });
+
+      this.width = max;
+    } else {
+      this.width = 0;
+    }
+
+    this.grid = grid;
+    this.status = null;
+    this.finishDelay = 1;
   }
 }
