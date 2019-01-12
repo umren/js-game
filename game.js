@@ -180,5 +180,15 @@ class Level {
     if (y2 > this.height) {
       return "lava";
     }
+
+    for (let y = y1; y < y2; y++) {
+      for (let x = x1; x < x2; x++) {
+        const item = this.grid[y][x];
+
+        if (item != undefined) {
+          return item;
+        }
+      }
+    }
   }
 }
