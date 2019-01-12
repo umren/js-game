@@ -55,9 +55,11 @@ class Actor {
       this.speed = new Vector(0, 0);
     }
 
+    // тут не понятно т.к. что потом наследуется от этого класса не может переписать свойство
     Object.defineProperty(this, "type", {
       value: "actor",
-      writable: false
+      writable: false,
+      configurable: true
     });
   }
 
@@ -198,5 +200,23 @@ class Level {
         delete this.actors[index];
       }
     });
+  }
+
+  // TODO
+  noMoreActors(actor) {
+    let actorLeft = true;
+
+    console.log(this.actors);
+    console.log(actor);
+
+    if (this.actors != undefined) {
+      this.actors.forEach(act => {
+        if (act.type === actor) {
+          actorLeft = false;
+        }
+      });
+    }
+
+    return actorLeft;
   }
 }
