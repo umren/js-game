@@ -1,5 +1,10 @@
 "use strict";
 
+const actorTypeToTitle = {
+  player: "Игрок",
+  mushroom: "Гриб"
+};
+
 class Vector {
   constructor(left = 0, top = 0) {
     this.x = left;
@@ -19,19 +24,19 @@ class Vector {
 
 class Actor {
   constructor(position, size, speed) {
-    // if position is given it must be a Vector
+    // если позиция передана она должна быть типом Vector
     if (position != undefined && !(position instanceof Vector)) {
       throw Error("Position is not a Vector");
     }
 
-    // if position is undefined, set default Vector
+    // если позиция не передана, задаем дефолт
     if (position != undefined) {
       this.pos = position;
     } else {
       this.pos = new Vector();
     }
 
-    // if size is given it must be a Vector
+    // Если размер if size is given it must be a Vector
     if (size != undefined && !(size instanceof Vector)) {
       throw Error("Size is not a Vector");
     }
@@ -211,7 +216,7 @@ class Level {
 
     if (this.actors != undefined) {
       this.actors.forEach(act => {
-        if (act.type === actor) {
+        if (act.title === actorTypeToTitle[actor]) {
           actorLeft = false;
         }
       });
