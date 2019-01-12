@@ -191,4 +191,12 @@ class Level {
       }
     }
   }
+
+  removeActor(actor) {
+    this.actors.forEach((act, index) => {
+      if (act === actor) {
+        delete this.actors[index];
+      }
+    });
+  }
 }
