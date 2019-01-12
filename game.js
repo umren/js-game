@@ -162,4 +162,23 @@ class Level {
       return found;
     }
   }
+
+  obstacleAt(pos, size) {
+    if (!(pos instanceof Vector) || !(size instanceof Vector)) {
+      throw Error("Not an vector");
+    }
+
+    const x1 = Math.floor(pos.x);
+    const x2 = Math.ceil(pos.x + size.x);
+    const y1 = Math.floor(pos.y);
+    const y2 = Math.ceil(pos.y + size.y);
+
+    if (x2 > this.width || x1 < 0 || y1 < 0) {
+      return "wall";
+    }
+
+    if (y2 > this.height) {
+      return "lava";
+    }
+  }
 }
