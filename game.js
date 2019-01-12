@@ -119,10 +119,10 @@ class Level {
       this.width = 0;
     }
 
-    if (grid != undefined) {
-      this.grid = grid;
-    } else {
+    if (arguments.length == 0) {
       this.grid = null;
+    } else {
+      this.grid = grid;
     }
 
     this.status = null;
