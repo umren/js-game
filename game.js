@@ -212,9 +212,6 @@ class Level {
   noMoreActors(actor) {
     let actorLeft = true;
 
-    console.log(this.actors);
-    console.log(actor);
-
     if (this.actors != undefined) {
       this.actors.forEach(act => {
         if (act.title === actorTypeToTitle[actor]) {
@@ -249,5 +246,10 @@ class Level {
 }
 
 class LevelParser {
-  actorFromSymbol() {}
+  constructor(dictionary) {
+    this.dictionary = dictionary;
+  }
+  actorFromSymbol(symbol) {
+    return symbol == undefined ? symbol : this.dictionary[symbol];
+  }
 }
