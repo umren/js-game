@@ -249,7 +249,14 @@ class LevelParser {
   constructor(dictionary) {
     this.dictionary = dictionary;
   }
+
   actorFromSymbol(symbol) {
     return symbol == undefined ? symbol : this.dictionary[symbol];
+  }
+
+  obstacleFromSymbol(symbol) {
+    if (symbol == undefined) return symbol;
+    if (symbol == "x") return "wall";
+    if (symbol == "!") return "lava";
   }
 }
