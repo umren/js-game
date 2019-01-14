@@ -202,12 +202,11 @@ class Level {
   removeActor(actor) {
     this.actors.forEach((act, index) => {
       if (act === actor) {
-        delete this.actors[index];
+        this.actors.splice(index, 1);
       }
     });
   }
 
-  // TODO
   noMoreActors(actor) {
     let actorLeft = true;
 
@@ -223,5 +222,12 @@ class Level {
     }
 
     return actorLeft;
+  }
+
+  playerTouched(object, actor) {
+    if (object === "lava" || object === "fireball") this.status = "lost";
+    if (object === "coin" && actor instanceof Actor) {
+      this.removeActor(actor);
+    }
   }
 }
