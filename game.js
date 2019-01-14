@@ -273,4 +273,20 @@ class LevelParser {
 
     return newArr;
   }
+
+  createActors(sArr) {
+    if (sArr.length == 0 || this.dictionary == undefined) return [];
+
+    let newArr = [];
+
+    sArr.forEach(symbol => {
+      let actor = this.actorFromSymbol(symbol);
+
+      if (typeof actor == "function" && actor instanceof Actor) {
+        newArr.push(actor);
+      }
+    });
+
+    return newArr;
+  }
 }
