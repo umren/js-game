@@ -259,4 +259,18 @@ class LevelParser {
     if (symbol == "x") return "wall";
     if (symbol == "!") return "lava";
   }
+
+  createGrid(sArr) {
+    let newArr = [];
+
+    sArr.forEach(arr => {
+      newArr.push(
+        arr.split("").map(symbol => {
+          return this.obstacleFromSymbol(symbol);
+        })
+      );
+    });
+
+    return newArr;
+  }
 }
