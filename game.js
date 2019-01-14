@@ -2,7 +2,9 @@
 
 const actorTypeToTitle = {
   player: "Игрок",
-  mushroom: "Гриб"
+  mushroom: "Гриб",
+  coinGold: "Золотая монета",
+  coinBronze: "Бронзовая монета"
 };
 
 class Vector {
@@ -225,9 +227,20 @@ class Level {
   }
 
   playerTouched(object, actor) {
-    if (object === "lava" || object === "fireball") this.status = "lost";
+    if (object === "lava" || object === "fireball") {
+      return (this.status = "lost");
+    }
+
     if (object === "coin" && actor instanceof Actor) {
       this.removeActor(actor);
+
+      let noMoreCoins = true;
+      this.actors.forEach(item => {
+        if (item.title.includes("монета")) {
+          noMoreCoins = false;
+          return (this.status = "won");
+        }
+      });
     }
   }
 }
