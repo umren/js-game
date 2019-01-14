@@ -238,9 +238,16 @@ class Level {
       this.actors.forEach(item => {
         if (item.title.includes("монета")) {
           noMoreCoins = false;
-          return (this.status = "won");
         }
       });
+
+      if (noMoreCoins) {
+        return (this.status = "won");
+      }
     }
   }
+}
+
+class LevelParser {
+  actorFromSymbol() {}
 }
