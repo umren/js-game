@@ -299,6 +299,10 @@ class LevelParser {
   }
 
   parse(sArr) {
-    // TODO
+    if (this.dictionary == undefined) {
+      return new Level(this.createGrid(sArr));
+    } else {
+      return new Level(this.createGrid(sArr), this.createActors(sArr));
+    }
   }
 }
