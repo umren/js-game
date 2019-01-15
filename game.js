@@ -38,24 +38,24 @@ class Actor {
       this.pos = new Vector();
     }
 
-    // Если размер if size is given it must be a Vector
+    // Если размер дан то это должен быть Vector
     if (size != undefined && !(size instanceof Vector)) {
       throw Error("Size is not a Vector");
     }
 
-    // if size is undefined, set it Vector(1,1 )
+    // если размер не задан, установим значение Vector(1, 1)
     if (size != undefined) {
       this.size = size;
     } else {
       this.size = new Vector(1, 1);
     }
 
-    // if size is given it must be a Vector
+    // если скорость задана это должен быть Vector
     if (speed != undefined && !(speed instanceof Vector)) {
       throw Error("Size is not a Vector");
     }
 
-    // if size is undefined, set it Vector(1,1 )
+    // если скорость не задана, установим значение Vector(0, 0)
     if (speed != undefined) {
       this.speed = speed;
     } else {
@@ -296,5 +296,9 @@ class LevelParser {
     });
 
     return newArr;
+  }
+
+  parse(sArr) {
+    // TODO
   }
 }
