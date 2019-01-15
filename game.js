@@ -279,16 +279,20 @@ class LevelParser {
 
     let newArr = [];
 
-    sArr.forEach(symbol => {
-      let actor = this.actorFromSymbol(symbol);
+    sArr.forEach(row => {
+      let symbols = row.split("");
 
-      if (typeof actor == "function") {
-        let newActor = new actor();
+      symbols.forEach(symbol => {
+        let actor = this.actorFromSymbol(symbol);
 
-        if (newActor instanceof Actor) {
-          newArr.push(new actor());
+        if (typeof actor == "function") {
+          let newActor = new actor();
+
+          if (newActor instanceof Actor) {
+            newArr.push(new actor());
+          }
         }
-      }
+      });
     });
 
     return newArr;
