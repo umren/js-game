@@ -25,7 +25,7 @@ class Vector {
 }
 
 class Actor {
-  constructor(position, size, speed) {
+  constructor(position, size, speed, type = "actor") {
     // если позиция передана она должна быть типом Vector
     if (position != undefined && !(position instanceof Vector)) {
       throw Error("Position is not a Vector");
@@ -64,7 +64,7 @@ class Actor {
 
     // тут не понятно т.к. что потом наследуется от этого класса не может переписать свойство
     Object.defineProperty(this, "type", {
-      value: "actor",
+      value: type,
       writable: false,
       configurable: true
     });
@@ -308,5 +308,9 @@ class LevelParser {
 }
 
 class Fireball {
-  constructor() {}
+  constructor(pos, speed) {
+    return new Actor(pos, new Vector(1, 1), speed, "fireball");
+  }
+
+  getNextPosition() {}
 }
