@@ -306,3 +306,7 @@ class LevelParser {
     }
   }
 }
+
+class Fireball {
+  constructor() {}
+}
