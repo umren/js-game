@@ -307,10 +307,10 @@ class LevelParser {
   }
 }
 
-class Fireball {
-  constructor(pos, speed) {
-    return new Actor(pos, new Vector(1, 1), speed, "fireball");
+class Fireball extends Actor {
+  constructor(position, speed) {
+    super(position, new Vector(1, 1), speed, "fireball");
   }
 
-  getNextPosition() {}
+  getNextPosition(time = 1) {}
 }
