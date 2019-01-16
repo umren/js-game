@@ -337,3 +337,9 @@ class Fireball extends Actor {
     }
   }
 }
+
+class HorizontalFireball extends Fireball {
+  constructor(position) {
+    super(position, new Vector(1, 1), new Vector(2, 0), "fireball");
+  }
+}
