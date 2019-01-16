@@ -312,5 +312,14 @@ class Fireball extends Actor {
     super(position, new Vector(1, 1), speed, "fireball");
   }
 
-  getNextPosition(time = 1) {}
+  getNextPosition(time = 1) {
+    let count = time;
+
+    while (count > 0) {
+      this.pos = this.pos.plus(this.speed);
+      count--;
+    }
+
+    return this.pos;
+  }
 }
