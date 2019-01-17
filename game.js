@@ -349,3 +349,9 @@ class VerticalFireball extends Fireball {
     super(position, new Vector(0, 2), new Vector(1, 1), "fireball");
   }
 }
+
+class FireRain extends Fireball {
+  constructor(position) {
+    super(position, new Vector(0, 3), new Vector(1, 1), "fireball");
+  }
+}
