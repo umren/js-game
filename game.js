@@ -373,7 +373,8 @@ class Coin extends Actor {
 
     this.springSpeed = 8;
     this.springDist = 0.07;
-    this.spring = Math.random() * Math.PI;
+    this.spring = parseFloat((Math.random() * Math.PI * 2).toFixed(3));
+    //this.spring = Math.random() * Math.PI * 2;
   }
 
   updateSpring(time = 1) {
@@ -381,6 +382,18 @@ class Coin extends Actor {
   }
 
   getSpringVector() {
-    return new Vector(0, Math.sin(this.spring) * this.springDist);
+    return new Vector(0, +(Math.sin(this.spring) * this.springDist).toFixed(3));
+    //return new Vector(0, Math.sin(this.spring) * this.springDist);
+  }
+
+  getNextPosition(time) {
+    let count = time;
+
+    do {
+      this.spring = this.spring + this.springSpeed;
+      count--;
+    } while (count > 0);
+
+    return new Vector(this.pos, this.spring).x;
   }
 }
