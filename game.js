@@ -360,3 +360,25 @@ class FireRain extends Fireball {
     this.pos = this.startPos;
   }
 }
+
+class Coin extends Actor {
+  constructor(position) {
+    let pos = position;
+
+    if (position != undefined) {
+      pos = new Vector(position.x + 0.2, position.y + 0.1);
+    }
+
+    super(pos, new Vector(0.6, 0.6), new Vector(1, 1), "coin");
+
+    this.springSpeed = 8;
+    this.springDist = 0.07;
+    this.spring = Math.random() * Math.PI;
+  }
+
+  updateSpring(time = 1) {
+    this.spring = this.spring + this.springSpeed * time;
+  }
+
+  getSpringVector() {}
+}
