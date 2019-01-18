@@ -402,3 +402,24 @@ class Player extends Actor {
     super(pos, new Vector(0.8, 1.5), new Vector(0, 0), "player");
   }
 }
+
+// Стартуем игру
+const schema = [
+  "                       ",
+  "                       ",
+  "                       ",
+  "          o        o   ",
+  "     !xxxxxxxxxxx  xxxx",
+  " @                     ",
+  "xxx!                   ",
+  "                 xxxx  ",
+  "       o               ",
+  "      xxx    xxx       "
+];
+const actorDict = {
+  "@": Player,
+  o: Coin
+};
+const parser = new LevelParser(actorDict);
+const level = parser.parse(schema);
+runLevel(level, DOMDisplay);
