@@ -382,8 +382,8 @@ class Coin extends Actor {
   }
 
   getSpringVector() {
-    return new Vector(0, +(Math.sin(this.spring) * this.springDist).toFixed(3));
-    //return new Vector(0, Math.sin(this.spring) * this.springDist);
+    //return new Vector(0, +(Math.sin(this.spring) * this.springDist).toFixed(3));
+    return new Vector(0, Math.sin(this.spring) * this.springDist);
   }
 
   getNextPosition(time) {
@@ -395,5 +395,17 @@ class Coin extends Actor {
     } while (count > 0);
 
     return new Vector(this.pos, this.spring).x;
+  }
+}
+
+class Player extends Actor {
+  constructor(position) {
+    let pos = position;
+
+    if (position != undefined) {
+      pos = new Vector(position.x, position.y - 0.5);
+    }
+
+    super(pos, new Vector(0.8, 1.5), new Vector(0, 0), "player");
   }
 }
