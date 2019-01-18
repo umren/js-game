@@ -405,7 +405,7 @@ class Player extends Actor {
 
 // Стартуем игру
 const schema = [
-  "                  z ",
+  "                    ",
   "                    ",
   "                    ",
   "          o        o",
