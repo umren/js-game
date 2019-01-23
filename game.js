@@ -233,12 +233,13 @@ class Level {
 
       let noMoreCoins = true;
       this.actors.forEach(item => {
-        if (item.title.includes("монета")) {
+        if (item.type == "coin") {
           noMoreCoins = false;
         }
       });
 
       if (noMoreCoins) {
+        console.log("Won!");
         return (this.status = "won");
       }
     }
@@ -388,7 +389,9 @@ class Coin extends Actor {
   getNextPosition(time = 1) {
     this.spring += time * this.springSpeed;
 
-    return new Vector(this.pos, this.getSpringVector().y);
+    let newY = this.getSpringVector().y;
+
+    return new Vector(0, newY);
   }
 
   // TODO
