@@ -371,6 +371,7 @@ class Coin extends Actor {
 
     super(pos, new Vector(0.6, 0.6), new Vector(1, 1), "coin");
 
+    this.startPos = pos;
     this.springSpeed = 8;
     this.springDist = 0.07;
     this.spring = Math.random() * Math.PI * 2;
@@ -387,7 +388,13 @@ class Coin extends Actor {
   getNextPosition(time = 1) {
     this.spring += time * this.springSpeed;
 
-    return new Vector(this.pos, this.spring).x;
+    return new Vector(this.pos, this.getSpringVector().y);
+  }
+
+  // TODO
+  act(time) {
+    const nextPos = this.getNextPosition(time);
+    this.pos = this.startPos.plus(nextPos);
   }
 }
 
@@ -408,12 +415,12 @@ const schema = [
   "                    ",
   "                    ",
   "                    ",
-  "          o        o",
+  "          o         ",
   "     !xxxxxxxxxxx  x",
   " @                  ",
   "xxx!                ",
   "                 xxx",
-  "       o            ",
+  "                    ",
   "      xxx    xxx    "
 ];
 const actorDict = {
