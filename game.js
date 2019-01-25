@@ -418,7 +418,7 @@ const schema = [
   "                    ",
   "                    ",
   "                    ",
-  "          o         ",
+  "          o        o",
   "     !xxxxxxxxxxx  x",
   " @                  ",
   "xxx!                ",
