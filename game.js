@@ -99,11 +99,20 @@ class Actor {
 
     if (JSON.stringify(this) == JSON.stringify(actor)) return false;
 
+    /*
     return !(
       this.left >= actor.right ||
       this.right <= actor.left ||
       this.top >= actor.bottom ||
       this.bottom <= actor.top
+    );
+    */
+
+    return (
+      actor.pos.x + actor.size.x > this.pos.x &&
+      actor.pos.x < this.pos.x + this.size.x &&
+      actor.pos.y + actor.size.y > this.pos.y &&
+      actor.pos.y < this.pos.y + this.size.y
     );
   }
 }
@@ -416,9 +425,9 @@ class Player extends Actor {
 // Стартуем игру
 const schema = [
   "                    ",
-  "          @         ",
   "                    ",
-  "          o        o",
+  "                    ",
+  "       @  o        o",
   "     !xxxxxxxxxxx  x",
   "                    ",
   "xxx!                ",
