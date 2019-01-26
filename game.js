@@ -99,15 +99,6 @@ class Actor {
 
     if (JSON.stringify(this) == JSON.stringify(actor)) return false;
 
-    /*
-    return !(
-      this.left >= actor.right ||
-      this.right <= actor.left ||
-      this.top >= actor.bottom ||
-      this.bottom <= actor.top
-    );
-    */
-
     return (
       actor.pos.x + actor.size.x > this.pos.x &&
       actor.pos.x < this.pos.x + this.size.x &&
