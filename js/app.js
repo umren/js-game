@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
 function loadLevels() {
   return new Promise((done, fail) => {
     const xhr = new XMLHttpRequest();
-    let url = './levels.json';
-    if (location.hostname !== 'localhost') {
-      url = 'https://neto-api.herokuapp.com/js/diplom/levels.json';
+    let url = "./levels.json";
+    if (location.hostname !== "localhost") {
+      url = "https://neto-api.herokuapp.com/js/diplom/levels.json";
     }
-    xhr.open('GET', url);
-    xhr.addEventListener('error', e => fail(xhr));
-    xhr.addEventListener('load', e => {
+    xhr.open("GET", url);
+    xhr.addEventListener("error", e => fail(xhr));
+    xhr.addEventListener("load", e => {
       if (xhr.status !== 200) {
         fail(xhr);
       }
@@ -21,7 +21,8 @@ function loadLevels() {
 
 const scale = 30;
 const maxStep = 0.05;
-const wobbleSpeed = 8, wobbleDist = 0.07;
+const wobbleSpeed = 8,
+  wobbleDist = 0.07;
 const playerXSpeed = 7;
 const gravity = 30;
 const jumpSpeed = 17;
@@ -35,7 +36,7 @@ function elt(name, className) {
 class DOMDisplay {
   constructor(parent, level) {
     this.wrap = parent.appendChild(elt("div", "game"));
-    this.wrap.setAttribute('autofocus', true)
+    this.wrap.setAttribute("autofocus", true);
     this.level = level;
 
     this.actorMap = new Map();
@@ -58,7 +59,7 @@ class DOMDisplay {
   }
 
   drawActor(actor) {
-    return elt('div', `actor ${actor.type}`);
+    return elt("div", `actor ${actor.type}`);
   }
 
   updateActor(actor, rect) {
@@ -69,7 +70,7 @@ class DOMDisplay {
   }
 
   drawActors() {
-    var wrap = elt('div');
+    var wrap = elt("div");
     this.level.actors.forEach(actor => {
       const rect = wrap.appendChild(this.drawActor(actor));
       this.actorMap.set(actor, rect);
@@ -101,22 +102,21 @@ class DOMDisplay {
     var margin = width / 3;
 
     // The viewport
-    var left = this.wrap.scrollLeft, right = left + width;
-    var top = this.wrap.scrollTop, bottom = top + height;
+    var left = this.wrap.scrollLeft,
+      right = left + width;
+    var top = this.wrap.scrollTop,
+      bottom = top + height;
 
     var player = this.level.player;
     if (!player) {
       return;
     }
-    var center = player.pos.plus(player.size.times(0.5))
-                   .times(scale);
+    var center = player.pos.plus(player.size.times(0.5)).times(scale);
 
-    if (center.x < left + margin)
-      this.wrap.scrollLeft = center.x - margin;
+    if (center.x < left + margin) this.wrap.scrollLeft = center.x - margin;
     else if (center.x > right - margin)
       this.wrap.scrollLeft = center.x + margin - width;
-    if (center.y < top + margin)
-      this.wrap.scrollTop = center.y - margin;
+    if (center.y < top + margin) this.wrap.scrollTop = center.y - margin;
     else if (center.y > bottom - margin)
       this.wrap.scrollTop = center.y + margin - height;
   }
@@ -126,7 +126,7 @@ class DOMDisplay {
   }
 }
 
-var arrowCodes = {37: "left", 38: "up", 39: "right"};
+var arrowCodes = { 37: "left", 38: "up", 39: "right" };
 
 function trackKeys(codes) {
   var pressed = Object.create(null);
@@ -193,16 +193,16 @@ function initGameObjects() {
         actor.act(thisStep, this, keys);
       });
 
-      if (this.status === 'lost') {
-        this.player.pos.y += thisStep;
-        this.player.size.y -= thisStep;
+      if (this.status === "lost") {
+        this.actors[0].pos.y += thisStep;
+        this.actors[0].size.y -= thisStep;
       }
 
       step -= thisStep;
     }
   };
 
-  Player.prototype.handleObstacle = function (obstacle) {
+  Player.prototype.handleObstacle = function(obstacle) {
     if (this.wontJump) {
       this.speed.y = -jumpSpeed;
     } else {
@@ -210,7 +210,7 @@ function initGameObjects() {
     }
   };
 
-  Player.prototype.move = function (motion, level) {
+  Player.prototype.move = function(motion, level) {
     var newPos = this.pos.plus(motion);
     var obstacle = level.obstacleAt(newPos, this.size);
     if (obstacle) {
@@ -221,7 +221,7 @@ function initGameObjects() {
     }
   };
 
-  Player.prototype.moveX = function (step, level, keys) {
+  Player.prototype.moveX = function(step, level, keys) {
     this.speed.x = 0;
     if (keys.left) this.speed.x -= playerXSpeed;
     if (keys.right) this.speed.x += playerXSpeed;
@@ -230,7 +230,7 @@ function initGameObjects() {
     this.move(motion, level);
   };
 
-  Player.prototype.moveY = function (step, level, keys) {
+  Player.prototype.moveY = function(step, level, keys) {
     this.speed.y += step * gravity;
     this.wontJump = keys.up && this.speed.y > 0;
 
@@ -238,7 +238,7 @@ function initGameObjects() {
     this.move(motion, level);
   };
 
-  Player.prototype.act = function (step, level, keys) {
+  Player.prototype.act = function(step, level, keys) {
     this.moveX(step, level, keys);
     this.moveY(step, level, keys);
 
@@ -252,16 +252,15 @@ function initGameObjects() {
 function runGame(plans, Parser, Display) {
   return new Promise(done => {
     function startLevel(n) {
-      runLevel(Parser.parse(plans[n]), Display)
-        .then(status => {
-          if (status == "lost") {
-            startLevel(n);
-          } else if (n < plans.length - 1) {
-            startLevel(n + 1);
-          } else {
-            done();
-          }
-        });
+      runLevel(Parser.parse(plans[n]), Display).then(status => {
+        if (status == "lost") {
+          startLevel(n);
+        } else if (n < plans.length - 1) {
+          startLevel(n + 1);
+        } else {
+          done();
+        }
+      });
     }
     startLevel(0);
   });
