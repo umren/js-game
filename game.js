@@ -341,13 +341,13 @@ class Fireball extends Actor {
 
 class HorizontalFireball extends Fireball {
   constructor(position) {
-    super(position, new Vector(2, 0), new Vector(1, 1), "fireball");
+    super(position, new Vector(0.1, 0), new Vector(1, 1), "fireball");
   }
 }
 
 class VerticalFireball extends Fireball {
   constructor(position) {
-    super(position, new Vector(0, 2), new Vector(1, 1), "fireball");
+    super(position, new Vector(0, 0.1), new Vector(1, 1), "fireball");
   }
 }
 
@@ -394,7 +394,6 @@ class Coin extends Actor {
     return new Vector(0, newY);
   }
 
-  // TODO
   act(time) {
     const nextPos = this.getNextPosition(time);
     this.pos = this.startPos.plus(nextPos);
@@ -413,23 +412,26 @@ class Player extends Actor {
   }
 }
 
-// Стартуем игру
+// Game itself
 const schema = [
+  "                  v ",
   "                    ",
   "                    ",
-  "                    ",
-  "       @  o        o",
+  "          o        o",
   "     !xxxxxxxxxxx  x",
-  "                    ",
+  " @                  ",
   "xxx!                ",
   "                 xxx",
-  "                    ",
+  "       o      f     ",
   "      xxx    xxx    "
 ];
 const actorDict = {
   "@": Player,
-  o: Coin
+  o: Coin,
+  f: HorizontalFireball,
+  v: VerticalFireball
 };
+
 const parser = new LevelParser(actorDict);
 const level = parser.parse(schema);
 runLevel(level, DOMDisplay);
