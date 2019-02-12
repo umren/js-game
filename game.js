@@ -362,7 +362,6 @@ class FireRain extends Fireball {
   }
 }
 
-// NEW
 class Coin extends Actor {
   constructor(position = new Vector(0, 0)) {
     let pos = position;
