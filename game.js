@@ -362,8 +362,9 @@ class FireRain extends Fireball {
   }
 }
 
+// NEW
 class Coin extends Actor {
-  constructor(position) {
+  constructor(position = new Vector(0, 0)) {
     let pos = position;
 
     if (position != undefined) {
@@ -391,12 +392,12 @@ class Coin extends Actor {
 
     let newY = this.getSpringVector().y;
 
-    return new Vector(0, newY);
+    return new Vector(this.startPos.x, this.startPos.y + newY);
   }
 
   act(time) {
     const nextPos = this.getNextPosition(time);
-    this.pos = this.startPos.plus(nextPos);
+    this.pos = nextPos;
   }
 }
 
