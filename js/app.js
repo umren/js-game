@@ -194,8 +194,12 @@ function initGameObjects() {
       });
 
       if (this.status === "lost") {
-        this.actors[0].pos.y += thisStep;
-        this.actors[0].size.y -= thisStep;
+        this.actors.forEach(actor => {
+          if (actor.type == "player") {
+            actor.pos.y += thisStep;
+            actor.size.y -= thisStep;
+          }
+        });
       }
 
       step -= thisStep;
