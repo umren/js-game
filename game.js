@@ -109,43 +109,31 @@ class Actor {
 }
 
 class Level {
-  constructor(grid, actors) {
-    if (grid != undefined) {
-      this.height = grid.length;
-    } else {
-      this.height = 0;
-    }
+  constructor(grid = [], actors = []) {
+    // устанавливаем высоту
+    this.height = grid.length;
 
-    if (grid != undefined) {
-      let max = 0;
+    // устанавливаем ширину
+    let max = 0;
+    grid.forEach(item => {
+      if (item.length > max) max = item.length;
+    });
+    this.width = max;
 
-      grid.forEach(item => {
-        if (item.length > max) max = item.length;
-      });
-
-      this.width = max;
-    } else {
-      this.width = 0;
-    }
-
-    if (arguments.length == 0) {
-      this.grid = null;
-    } else {
-      this.grid = grid;
-    }
+    // устанавливаем грид
+    this.grid = grid;
 
     this.status = null;
     this.finishDelay = 1;
 
-    if (actors != undefined) {
-      this.actors = actors;
+    // устанавливаем акторов
+    this.actors = actors;
 
-      actors.forEach(actor => {
-        if (actor.title == "Игрок") {
-          this.player = actor;
-        }
-      });
-    }
+    actors.forEach(actor => {
+      if (actor.title == "Игрок") {
+        this.player = actor;
+      }
+    });
   }
 
   isFinished() {
