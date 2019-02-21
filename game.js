@@ -25,42 +25,30 @@ class Vector {
 }
 
 class Actor {
-  constructor(position, size, speed, type = "actor") {
+  constructor(position = new Vector(), size = new Vector(1, 1)
+              , speed = new Vector(0, 0), type = "actor") {
     // если позиция передана она должна быть типом Vector
-    if (position != undefined && !(position instanceof Vector)) {
+    if (!(position instanceof Vector)) {
       throw Error("Position is not a Vector");
     }
 
-    // если позиция не передана, задаем дефолт
-    if (position != undefined) {
-      this.pos = position;
-    } else {
-      this.pos = new Vector();
-    }
-
     // Если размер дан то это должен быть Vector
-    if (size != undefined && !(size instanceof Vector)) {
+    if (!(size instanceof Vector)) {
       throw Error("Size is not a Vector");
-    }
-
-    // если размер не задан, установим значение Vector(1, 1)
-    if (size != undefined) {
-      this.size = size;
-    } else {
-      this.size = new Vector(1, 1);
     }
 
     // если скорость задана это должен быть Vector
-    if (speed != undefined && !(speed instanceof Vector)) {
+    if (!(speed instanceof Vector)) {
       throw Error("Size is not a Vector");
     }
 
-    // если скорость не задана, установим значение Vector(0, 0)
-    if (speed != undefined) {
-      this.speed = speed;
-    } else {
-      this.speed = new Vector(0, 0);
-    }
+    // задаем позицию
+    this.pos = position;
+    // задаем размер
+    this.size = size;
+    // задаем скорость
+    this.speed = speed;
+    
 
     // тут не понятно т.к. что потом наследуется от этого класса не может переписать свойство
     Object.defineProperty(this, "type", {
