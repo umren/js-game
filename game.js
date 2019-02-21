@@ -48,7 +48,6 @@ class Actor {
     this.size = size;
     // задаем скорость
     this.speed = speed;
-    
 
     // тут не понятно т.к. что потом наследуется от этого класса не может переписать свойство
     Object.defineProperty(this, "type", {
@@ -56,7 +55,21 @@ class Actor {
       writable: false,
       configurable: true
     });
+
+    // задаем тип
+    //this.type = type;
   }
+
+  /*
+  set type(val) {
+    if (this._type != undefined) throw Error("can't change type");
+    this._type = val;
+  }
+
+  get type() {
+    return this._type;
+  }
+  */
 
   set pos(val) {
     this._position = val;
