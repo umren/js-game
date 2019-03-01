@@ -176,13 +176,11 @@ class Level {
   noMoreActors(actor) {
     let actorLeft = true;
 
-    if (this.actors != undefined) {
-      this.actors.forEach(act => {
-        if (act.title === actorTypeToTitle[actor]) {
-          actorLeft = false;
-        }
-      });
-    }
+    this.actors.forEach(act => {
+      if (act.title === actorTypeToTitle[actor]) {
+        actorLeft = false;
+      }
+    });
 
     return actorLeft;
   }
@@ -328,11 +326,7 @@ class FireRain extends Fireball {
 
 class Coin extends Actor {
   constructor(position = new Vector(0, 0)) {
-    let pos = position;
-
-    if (position != undefined) {
-      pos = pos.plus(new Vector(0.2, 0.1));
-    }
+    let pos = position.plus(new Vector(0.2, 0.1));
 
     super(pos, new Vector(0.6, 0.6), new Vector(1, 1), "coin");
 
