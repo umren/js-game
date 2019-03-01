@@ -125,16 +125,11 @@ class Level {
   }
 
   isFinished() {
-    if (this.status != null && this.finishDelay < 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.status != null && this.finishDelay < 0;
   }
 
   actorAt(actor) {
     if (!(actor instanceof Actor)) throw Error("Not an actor");
-    if (this.grid === null) return undefined;
     if (this.actors.length == 1) return undefined;
 
     if (this.actors != undefined) {
