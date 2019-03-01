@@ -88,7 +88,7 @@ class Actor {
       throw Error("Not a Actor");
     }
 
-    if (JSON.stringify(this) == JSON.stringify(actor)) return false;
+    if (this == actor) return false;
 
     return (
       actor.pos.x + actor.size.x > this.pos.x &&
@@ -105,11 +105,9 @@ class Level {
     this.height = grid.length;
 
     // устанавливаем ширину
-    let max = 0;
-    grid.forEach(item => {
-      if (item.length > max) max = item.length;
-    });
-    this.width = max;
+    this.width = grid.reduce((max, current) => {
+      return current.length > max ? current.length : max;
+    }, 0);
 
     // устанавливаем грид
     this.grid = grid;
@@ -120,10 +118,9 @@ class Level {
     // устанавливаем акторов
     this.actors = actors;
 
-    actors.forEach(actor => {
-      if (actor.title == "Игрок") {
-        this.player = actor;
-      }
+    // устанавливаем игрока
+    actors.find(actor => {
+      if (actor.type == "player") this.player = actor;
     });
   }
 
