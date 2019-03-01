@@ -25,8 +25,7 @@ class Vector {
 }
 
 class Actor {
-  constructor(position = new Vector(), size = new Vector(1, 1)
-              , speed = new Vector(0, 0), type = "actor") {
+  constructor(position = new Vector(), size = new Vector(1, 1), speed = new Vector(0, 0), type = "actor") {
     // если позиция передана она должна быть типом Vector
     if (!(position instanceof Vector)) {
       throw Error("Position is not a Vector");
@@ -49,18 +48,10 @@ class Actor {
     // задаем скорость
     this.speed = speed;
 
-    // тут не понятно т.к. что потом наследуется от этого класса не может переписать свойство
-    Object.defineProperty(this, "type", {
-      value: type,
-      writable: false,
-      configurable: true
-    });
-
     // задаем тип
-    //this.type = type;
+    this._type = type;
   }
 
-  /*
   set type(val) {
     if (this._type != undefined) throw Error("can't change type");
     this._type = val;
@@ -69,7 +60,6 @@ class Actor {
   get type() {
     return this._type;
   }
-  */
 
   set pos(val) {
     this._position = val;
