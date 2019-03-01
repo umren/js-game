@@ -130,17 +130,10 @@ class Level {
 
   actorAt(actor) {
     if (!(actor instanceof Actor)) throw Error("Not an actor");
-    if (this.actors.length == 1) return undefined;
 
-    if (this.actors != undefined) {
-      let found = undefined;
-      this.actors.forEach(act => {
-        if (act.isIntersect(actor)) {
-          found = act;
-        }
-      });
-      return found;
-    }
+    return this.actors.find(act => {
+      if (act.isIntersect(actor)) return act;
+    });
   }
 
   obstacleAt(pos, size) {
@@ -173,8 +166,8 @@ class Level {
   }
 
   removeActor(actor) {
-    this.actors.forEach((act, index) => {
-      if (act === actor) {
+    this.actors.find((act, index) => {
+      if (act == actor) {
         this.actors.splice(index, 1);
       }
     });
